@@ -34,20 +34,44 @@
 Для реализации основного меню можно использовать пример ниже или написать свой
 """
 
+# Инициализация переменных
+balance = 0  # Текущий баланс счета
+purchases = []  # Список покупок: [(название, сумма), ...]
+
 while True:
-    print('1. пополнение счета')
+    # Вывод меню
+    print('\n1. пополнение счета')
     print('2. покупка')
     print('3. история покупок')
     print('4. выход')
 
-    choice = input('Выберите пункт меню')
+    choice = input('Выберите пункт меню: ')
     if choice == '1':
-        pass
+        # Пополнение счета
+        amount = float(input('Введите сумму для пополнения: '))
+        balance += amount
+        print(f'Счет пополнен на {amount}. Текущий баланс: {balance}')
     elif choice == '2':
-        pass
+        # Покупка
+        amount = float(input('Введите сумму покупки: '))
+        if amount > balance:
+            print('Недостаточно средств на счете.')
+        else:
+            name = input('Введите название покупки: ')
+            balance -= amount
+            purchases.append((name, amount))
+            print(f'Покупка "{name}" на сумму {amount} совершена. Текущий баланс: {balance}')
     elif choice == '3':
-        pass
+        # История покупок
+        if not purchases:
+            print('История покупок пуста.')
+        else:
+            print('История покупок:')
+            for name, amount in purchases:
+                print(f'- {name}: {amount}')
     elif choice == '4':
+        # Выход
+        print('Выход из программы.')
         break
     else:
-        print('Неверный пункт меню')
+        print('Неверный пункт меню. Попробуйте снова.')
